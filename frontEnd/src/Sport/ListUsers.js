@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import NavBarAdd from "./NavBarAdd";
+import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
@@ -8,6 +9,17 @@ import FormCheck from "react-bootstrap/FormCheck";
 import Container from "react-bootstrap/Container";
 
 const Users = () => {
+    const [user,setUser] =useState([])
+    useEffect(() => {
+        fetchUser();
+       
+    }, []);
+    const fetchUser =async() =>{ // data from database
+        await axios.get('http://127.0.0.1:8000/api/client')
+        .then(({data})=>{
+            setUser(data) 
+        })
+    }
     return(
         <div className="">
             <NavBarAdd/>
@@ -28,15 +40,19 @@ const Users = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    {user.length > 0 && (
+                    user.map((row,key) =>(
                     <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{row.LastName}</td>
+                    <td>{row.FirstName}</td>
+                    <td>{row.EmailAddress}</td>
+                    <td>{row.NumberPhone}</td>
                     <td>
                         <FormCheck label="Delete"/>    
                     </td>
                     </tr>
+                    ))
+                    )}
                 </tbody>
             </Table>
             </Container>
