@@ -23,6 +23,8 @@ return new class extends Migration
             $table->date('BookTime');
             $table->date('Duration');
             $table->float('Price');
+            $table->foreignId('infoTerrain_id')->contrained('info_terrains');
+            $table->foreignId('client_id')->contrained('clients');
             $table->timestamps();
         });
     }

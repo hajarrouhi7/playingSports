@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InfoTirranController;
+use App\Http\Controllers\InfoTerrainController;
 use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\ReservationController;
 
