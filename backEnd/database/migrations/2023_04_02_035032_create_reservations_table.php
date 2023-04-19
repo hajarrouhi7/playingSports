@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('LastName');
             $table->string('Email');
             $table->integer('Number');
-            $table->integer('Basic de picker');
+            $table->integer('DateBook');
             $table->date('BookTime');
             $table->date('Duration');
             $table->float('Price');

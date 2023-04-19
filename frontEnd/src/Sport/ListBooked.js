@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 import Container from "react-bootstrap/Container";
 import NavBarAdd from "./NavBarAdd";
 import Form from 'react-bootstrap/Form';
@@ -8,6 +9,17 @@ import { AiOutlineSearch  } from 'react-icons/ai';
 import FormCheck from "react-bootstrap/FormCheck";
 
 const ListBook = () => {
+    const [book,setBook] =useState([])
+    useEffect(() => {
+        fetchBook();
+       
+    }, []);
+    const fetchBook =async() =>{ // data from database
+        await axios.get('http://127.0.0.1:8000/api/Reservation')
+        .then(({data})=>{
+            setBook(data) 
+        })
+    }
     return(
         <div>
             <NavBarAdd/>
@@ -31,18 +43,22 @@ const ListBook = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    {book.length > 0 && (
+                    book.map((row,key) =>(
                     <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{row.LastName} {row.FirstName}</td>
+                    <td>{row.Email}</td>
+                    <td>{row.Number}</td>
+                    <td>{row.DateBook}</td>
+                    <td>{row.BookTime}</td>
+                    <td>{row.Duration}</td>
+                    <td>{row.Price}</td>
                     <td>
                         <FormCheck label="Delete"/>    
                     </td>
                     </tr>
+                    ))
+                    )}
                 </tbody>
             </Table>
             </Container>

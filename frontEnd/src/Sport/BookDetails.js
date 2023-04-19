@@ -126,7 +126,7 @@ const BookDetails = () => {
       }
     }
     const handlduration= (e) =>{
-        if ( e.length >=4 ){
+        if ( e.length >=0 ){
           setFoc(true)
           setduration(e)
           setIsValid7(false)
@@ -151,14 +151,14 @@ const BookDetails = () => {
       }
       const handleSubmit =()=>{
         const obj ={
-          "firstName":firstName,
-          "lastName":lastName,
-          "email":email,
-          "number":number,
-          "dateBook":dateBook,
-          "timeBook":timeBook,
-          "duration":duration,
-          "totalPrice":totalPrice
+          "FirstName":FirstName,
+          "LastName":LastName,
+          "Email":Email,
+          "Number":Number,
+          "DateBook":DateBook,
+          "TimeBook":TimeBook,
+          "Duration":Duration,
+          "TotalPrice":TotalPrice
       
       }
       console.log('data =>',obj);

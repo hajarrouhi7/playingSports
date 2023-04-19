@@ -40,7 +40,7 @@ class ReservationController extends Controller
         $Reservation->LastName= $request->LastName;
         $Reservation->Email= $request->Email;
         $Reservation->Number= $request->Number;
-        $Reservation->BasicDePpicker= $request->BasicDePpicker;
+        $Reservation->DateBook= $request->DateBook;
         $Reservation->BookTime= $request->BookTime;
         $Reservation->Duration= $request->Duration;
         $Reservation->Price= $request->Price;
@@ -60,7 +60,7 @@ class ReservationController extends Controller
         ->orWhere('FirstName',$id)
         ->orWhere('LastName',$id)
         ->orWhere('Email',$id)
-        ->orWhere('BasicDePpicker',$id)
+        ->orWhere('DateBook',$id)
         ->orWhere('BookTime',$id)
         ->orWhere('Duration',$id)
         ->orWhere('Price',$id)
@@ -92,7 +92,7 @@ return $data;
         $Reservation->LastName= $request->LastName;
         $Reservation->Email= $request->Email;
         $Reservation->Number= $request->Number;
-        $Reservation->BasicDePpicker= $request->BasicDePpicker;
+        $Reservation->DateBook= $request->DateBook;
         $Reservation->BookTime= $request->BookTime;
         $Reservation->Duration= $request->Duration;
         $Reservation->Price= $request->Price;
