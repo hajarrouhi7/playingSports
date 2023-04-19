@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('info_terrains', function (Blueprint $table) {
-            $table->id();
             $table->increments('id');
             $table->string('img1')->nullable();
             $table->string('img2')->nullable();
@@ -26,7 +25,6 @@ return new class extends Migration
             $table->string('surface');
             $table->string('ville');
             $table->string('location');
-            $table->timestamps();
             $table->timestamps();
         });
     }
