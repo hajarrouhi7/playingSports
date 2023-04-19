@@ -6,6 +6,7 @@ import React from "react";
 import { Routes ,  Route } from "react-router-dom";
 import Home from './Sport/Home';
 import Search from './Sport/Search';
+import Client from './Sport/Client';
 import View from './Sport/View';
 import InfoView from './Sport/InfoView';
 import BookDetails from './Sport/BookDetails';
@@ -33,6 +34,7 @@ function App() {
         <Route path='/Payment' element={<PaymentDetails/>}/>
         <Route path='/CardBook' element={<CardBook/>}/>
         <Route path='/SignIn' element={<SignIn/>}/>
+        <Route path='/Client' element={<Client/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
         <Route path='/Admin' element={<Admin/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
