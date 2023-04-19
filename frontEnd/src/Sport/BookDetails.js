@@ -26,14 +26,14 @@ import {useState} from 'react';
 const theme = createTheme();
 const BookDetails = () => {
     const route=useNavigate()
-    const[firstName,setfirstName]= useState('')
-    const[lastName,setlastName]= useState('')
-    const[email,setemail]= useState('')
-    const[number,setnumber]= useState('')
-    const[dateBook,setdateBook]= useState('')
-    const[timeBook,settimeBook]= useState('')
-    const[duration,setduration]= useState('')
-    const[totalPrice,settotalPrice]= useState('')
+    const[FirstName,setfirstName]= useState('')
+    const[LastName,setlastName]= useState('')
+    const[Email,setemail]= useState('')
+    const[Number,setnumber]= useState('')
+    const[DateBook,setdateBook]= useState('')
+    const[TimeBook,settimeBook]= useState('')
+    const[Duration,setduration]= useState('')
+    const[TotalPrice,settotalPrice]= useState('')
     const [data,setData] =useState([])
     const [isValid1,setIsValid1] = useState(false)
     const [isValid2,setIsValid2] = useState(false)
@@ -183,29 +183,29 @@ const BookDetails = () => {
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="firstName" name="firstName" fullWidth label="First name" autoComplete="given-name" variant="standard" autoFocus focused={foc} color={color1}  error={isValid1} onChange={(e)=>{handlfirstName(e.target.value)} }/>
+                        <TextField required id="FirstName" name="FirstName" fullWidth label="First name" autoComplete="given-name" variant="standard" autoFocus focused={foc} color={color1}  error={isValid1} onChange={(e)=>{handlfirstName(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="lastName" name="lastName" label="Last name" fullWidth autoComplete="family-name" variant="standard"autoFocus focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handllastName(e.target.value)} } />
+                        <TextField required id="LastName" name="LastName" label="Last name" fullWidth autoComplete="family-name" variant="standard"autoFocus focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handllastName(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField required id="email" name="email" label="E-mail" fullWidth autoComplete="email" variant="standard"focused={foc} color={color3}  error={isValid3} onChange={(e)=>{handlemail(e.target.value)} } />
+                        <TextField required id="Email" name="Email" label="E-mail" fullWidth autoComplete="email" variant="standard"focused={foc} color={color3}  error={isValid3} onChange={(e)=>{handlemail(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField required id="number" name="number" label="Number" fullWidth autoComplete="number" variant="standard" focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlnumber(e.target.value)} } />
+                        <TextField required id="Number" name="Number" label="Number" fullWidth autoComplete="number" variant="standard" focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlnumber(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}  sm={6}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
                             <DemoItem>
-                                <DatePicker name="dateBook" label="Date Book" focused={foc} color={color5}  error={isValid5} onChange={(e)=>{handldateBook(e.target.value)} }/>
+                                <DatePicker name="DateBook" label="Date Book" focused={foc} color={color5}  error={isValid5} onChange={(e)=>{handldateBook(e.target.value)} }/>
                             </DemoItem>
                             </DemoContainer>
                         </LocalizationProvider>
                     </Grid>
                     <Grid item xs={12}  sm={6}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer name="timeBook" components={['MobileTimePicker',]}>
+                            <DemoContainer name="TimeBook" components={['MobileTimePicker',]}>
                             <DemoItem>
                                 <MobileTimePicker label="Book Time" focused={foc} color={color6}  error={isValid6} onChange={(e)=>{handltimeBook(e.target.value)} } />
                             </DemoItem>
@@ -213,10 +213,10 @@ const BookDetails = () => {
                         </LocalizationProvider>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="duration" name="duration" label="Duration" fullWidth autoComplete="duration" variant="standard"  focused={foc} color={color7}  error={isValid7} onChange={(e)=>{handlduration(e.target.value)} }/>
+                        <TextField required id="Duration" name="Duration" label="Duration" fullWidth autoComplete="duration" variant="standard"  focused={foc} color={color7}  error={isValid7} onChange={(e)=>{handlduration(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="totalPrice" name="totalPrice" label="price" fullWidth autoComplete="totalPrice" variant="standard" focused={foc} color={color8}  error={isValid8} onChange={(e)=>{handltotalPrice(e.target.value)} } />
+                        <TextField required id="TotalPrice" name="TotalPrice" label="price" fullWidth autoComplete="totalPrice" variant="standard" focused={foc} color={color8}  error={isValid8} onChange={(e)=>{handltotalPrice(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
                         <FormControlLabel control={<Checkbox color="secondary" name="saveAddress" value="yes" />} label="Use this Booked details for payment details"/>
