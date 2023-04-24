@@ -106,10 +106,13 @@ return $data;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(string $id)
     {
+        $reservation = Reservation::findOrFail($id);
         $reservation->delete();
-       return response()->json(['status'=> 'Success']); 
+        return response()->json([
+            'message'=>'You want to delete this booking'
+        ]);
     }
     }
 

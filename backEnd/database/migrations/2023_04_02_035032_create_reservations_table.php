@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('LastName');
             $table->string('Email');
             $table->integer('Number');
-            $table->integer('DateBook');
-            $table->date('BookTime');
-            $table->date('Duration');
+            $table->date('DateBook');
+            $table->time('BookTime');
+            $table->integer('Duration');
             $table->float('Price');
             $table->foreignId('infoTerrain_id')->contrained('info_terrains');
             $table->foreignId('client_id')->contrained('clients');

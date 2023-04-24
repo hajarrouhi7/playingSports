@@ -4,8 +4,8 @@ import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
+import Button from "react-bootstrap/Button";
 import { AiOutlineSearch  } from 'react-icons/ai';
-import FormCheck from "react-bootstrap/FormCheck";
 import Container from "react-bootstrap/Container";
 
 const Users = () => {
@@ -18,6 +18,15 @@ const Users = () => {
         await axios.get('http://127.0.0.1:8000/api/client')
         .then(({data})=>{
             setUser(data) 
+        })
+    }
+    const deleteUser = async(id) =>{
+        await axios.delete('http://127.0.0.1:8000/api/client/'+ id)
+        .then(({data})=>{
+            alert(data.message)
+            fetchUser();
+        }).catch(({response: {data}}) => {
+            alert(data.message)
         })
     }
     return(
@@ -41,14 +50,14 @@ const Users = () => {
                 </thead>
                 <tbody>
                     {user.length > 0 && (
-                    user.map((row,key) =>(
+                    user.map((row) =>(
                     <tr>
                     <td>{row.LastName}</td>
                     <td>{row.FirstName}</td>
                     <td>{row.EmailAddress}</td>
                     <td>{row.NumberPhone}</td>
                     <td>
-                        <FormCheck label="Delete"/>    
+                    <Button className="bg-danger" onClick={() => deleteUser(row.id)}>Delete</Button>    
                     </td>
                     </tr>
                     ))

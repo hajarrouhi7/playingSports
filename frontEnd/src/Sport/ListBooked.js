@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
 import NavBarAdd from "./NavBarAdd";
+import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
@@ -18,6 +19,15 @@ const ListBook = () => {
         await axios.get('http://127.0.0.1:8000/api/Reservation')
         .then(({data})=>{
             setBook(data) 
+        })
+    }
+    const deleteBooked = async(id) =>{
+        await axios.delete('http://127.0.0.1:8000/api/Reservation/'+ id)
+        .then(({data})=>{
+            alert(data.message)
+            fetchBook();
+        }).catch(({response: {data}}) => {
+            alert(data.message)
         })
     }
     return(
@@ -44,7 +54,7 @@ const ListBook = () => {
                 </thead>
                 <tbody>
                     {book.length > 0 && (
-                    book.map((row,key) =>(
+                    book.map((row) =>(
                     <tr>
                     <td>{row.LastName} {row.FirstName}</td>
                     <td>{row.Email}</td>
@@ -54,7 +64,7 @@ const ListBook = () => {
                     <td>{row.Duration}</td>
                     <td>{row.Price}</td>
                     <td>
-                        <FormCheck label="Delete"/>    
+                    <Button className="bg-danger" onClick={() => deleteBooked(row.id)}>Delete</Button>    
                     </td>
                     </tr>
                     ))

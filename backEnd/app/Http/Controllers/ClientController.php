@@ -98,12 +98,15 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    
+    public function destroy(string $id)
     {
+        $client = Client::findOrFail($id);
         $client->delete();
-       return response()->json(['status'=> 'Success']); 
+        return response()->json([
+            'message'=>'You want to delete this user'
+        ]);
     }
-
     public function search(Request $request){
         $search = Client::where($request->all())->get();       
          return response()->json(['result'=> $search]); 
