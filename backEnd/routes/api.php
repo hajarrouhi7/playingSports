@@ -27,8 +27,11 @@ Route::resource('client', ClientController::class);
 Route::post('client/search',[ ClientController::class,'search']);
 
 //'''''''''''''''''''''''''les Api InfoTirran'''''''''''''''''''''''''''''//
+
 Route::resource('InfoTirran', InfoTirranController::class);
 Route::resource('/InfoTerrain',InfoTerrainController::class);
+Route::post('/SearchInfoTiran',[InfoTerrainController::class,"SearchInfoTiran"]);
+
 //'''''''''''''''''''''''''les Api PaymentDetails'''''''''''''''''''''''''''''//
 Route::resource('PaymentDetails', PaymentDetailsController::class);
 

@@ -11,20 +11,24 @@ import './View.css';
 import InfoView from "./InfoView";
 import {useNavigate } from "react-router-dom";
 
+
+
 const View = () => {
     const [terrain, setTerrain] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const route = useNavigate()
   
+
     useEffect(() => {
       fetchTerrain();
     }, []);
   
-    const fetchTerrain = async () => {
+    const fetchTerrain =  () => {
+      
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/InfoTerrain");
-        setTerrain(response.data);
+        const Infos = JSON.parse(sessionStorage.getItem("Infos"))
+        Infos ? setTerrain(Infos) : route("/Search")
         setLoading(false);
       } catch (error) {
         console.error(error);
