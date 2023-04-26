@@ -22,14 +22,22 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import {useState} from 'react';
+import dayjs from 'dayjs';
 
 const theme = createTheme();
+
 const BookDetails = () => {
+  const Client = JSON.parse(sessionStorage.getItem("Client")) 
+  const Infos = JSON.parse(sessionStorage.getItem("Infos")) 
+
+
+// const twoPM = dayjs().set('hour', 7).startOf('hour');
+// const threePM = dayjs().set('hour', 22).startOf('hour');
     const route=useNavigate()
-    const[FirstName,setfirstName]= useState('')
-    const[LastName,setlastName]= useState('')
-    const[Email,setemail]= useState('')
-    const[Number,setnumber]= useState('')
+    const[FirstName,setfirstName]= useState(Client[0].FirstName)
+    const[LastName,setlastName]= useState(Client[0].LastName)
+    const[Email,setemail]= useState(Client[0].EmailAddress)
+    const[Number,setnumber]= useState(Client[0].NumberPhone)
     const[DateBook,setdateBook]= useState('')
     const[TimeBook,settimeBook]= useState('')
     const[Duration,setduration]= useState('')
@@ -52,6 +60,12 @@ const BookDetails = () => {
     const [color7,setColor7] = useState("")
     const [color8,setColor8] = useState("")
     const [foc,setFoc] = useState(false)
+    const time = React.useRef()
+    const date = React.useRef()
+    const ok = React.useRef('')
+   
+
+
 
     const handlfirstName = (e) =>{
         if ( e.length >=4 ){
@@ -150,19 +164,35 @@ const BookDetails = () => {
         }
       }
       const handleSubmit =()=>{
-        const obj ={
-          "FirstName":FirstName,
-          "LastName":LastName,
-          "Email":Email,
-          "Number":Number,
-          "DateBook":DateBook,
-          "TimeBook":TimeBook,
+        const obj = {
+          
+    "FirstName":"abdou",
+    "LastName":"xxx",
+    "Email":"xxxx@gmail.com",
+    "Number":"0987777777",
+    "DateBook":"123",
+    "BookTime":"2022-09-11 11:21:00",
+    "Duration":"2022-09-11 11:21:00",
+    "Price":"123",
+            "infoTerrain_id":"3",
+            "client_id" : "1"
+        }
+        const datee = (date.current.value).split('/')
+        const obj1 ={
+          "FirstName":FirstName.toString(),
+          "LastName":LastName.toString(),
+          "Email":Email.toString(),
+          "Number":Number.toString(),
+          "DateBook":date.current.value,
+          "BookTime":time.current.value.toString(),
           "Duration":Duration,
-          "TotalPrice":TotalPrice
+          "Price":TotalPrice,
+          "infoTerrain_id":Infos[0].id.toString(),
+          "client_id" : Client[0].id.toString()
       
       }
-      console.log('data =>',obj);
-      axios.post("http://127.0.0.1:8000/api/Reservation",obj).then((response)=>{
+      console.log('data =>',obj1);
+      axios.post("http://127.0.0.1:8000/api/Reservation ",obj1).then((response)=>{
         route('/Payment')
        
        }) 
@@ -183,22 +213,22 @@ const BookDetails = () => {
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="FirstName" name="FirstName" fullWidth label="First name" autoComplete="given-name" variant="standard" autoFocus focused={foc} color={color1}  error={isValid1} onChange={(e)=>{handlfirstName(e.target.value)} }/>
+                        <TextField required id="FirstName"  defaultValue={FirstName} name="FirstName" fullWidth label="First name" autoComplete="given-name" variant="standard" autoFocus focused={foc} color={color1}  error={isValid1} onChange={(e)=>{handlfirstName(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="LastName" name="LastName" label="Last name" fullWidth autoComplete="family-name" variant="standard"autoFocus focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handllastName(e.target.value)} } />
+                        <TextField required id="LastName"  defaultValue={LastName} name="LastName" label="Last name" fullWidth autoComplete="family-name" variant="standard"autoFocus focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handllastName(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField required id="Email" name="Email" label="E-mail" fullWidth autoComplete="email" variant="standard"focused={foc} color={color3}  error={isValid3} onChange={(e)=>{handlemail(e.target.value)} } />
+                        <TextField required id="Email"  defaultValue={Email}  ref={ok} name="Email" label="E-mail" fullWidth autoComplete="email" variant="standard"focused={foc} color={color3}  error={isValid3} onChange={(e)=>{handlemail(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField required id="Number" name="Number" label="Number" fullWidth autoComplete="number" variant="standard" focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlnumber(e.target.value)} } />
+                        <TextField required id="Number" defaultValue={Number} name="Number" label="Number" fullWidth autoComplete="number" variant="standard" focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlnumber(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}  sm={6}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
                             <DemoItem>
-                                <DatePicker name="DateBook" label="Date Book" focused={foc} color={color5}  error={isValid5} onChange={(e)=>{handldateBook(e.target.value)} }/>
+                                <DatePicker name="DateBook" label="Date Book" focused={foc} color={color5}  error={isValid5} inputRef={date}  defaultValue={JSON.stringify(new Date())} />
                             </DemoItem>
                             </DemoContainer>
                         </LocalizationProvider>
@@ -207,7 +237,7 @@ const BookDetails = () => {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer name="TimeBook" components={['MobileTimePicker',]}>
                             <DemoItem>
-                                <MobileTimePicker label="Book Time" focused={foc} color={color6}  error={isValid6} onChange={(e)=>{handltimeBook(e.target.value)} } />
+                                <MobileTimePicker label="Book Time" focused={foc} color={color6} inputRef={time}  defaultValue={JSON.stringify(new Date())}      />
                             </DemoItem>
                             </DemoContainer>
                         </LocalizationProvider>

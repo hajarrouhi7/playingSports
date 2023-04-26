@@ -45,7 +45,7 @@ const NavBar = () => {
             id:1,
             title:"Sign Up",
             icon:<PersonAddAlt1RoundedIcon/>,
-            href:"./SignUp",
+            href:"./client",
         },
         {   
             id:2,

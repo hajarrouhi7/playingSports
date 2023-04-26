@@ -44,6 +44,9 @@ class ReservationController extends Controller
         $Reservation->BookTime= $request->BookTime;
         $Reservation->Duration= $request->Duration;
         $Reservation->Price= $request->Price;
+        $Reservation->infoTerrain_id= $request->infoTerrain_id;
+        $Reservation->client_id= $request->client_id;
+
         $Reservation->save();
         return response()->json(['status'=> 'Success']);
     }

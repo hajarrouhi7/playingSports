@@ -15,6 +15,7 @@ import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import {useNavigate } from "react-router-dom";
 
 
 
@@ -35,6 +36,7 @@ const theme = createTheme();
 
 
 const SignIn = () => {
+  const route = useNavigate()
     const[email,setEmail]= useState('')
     const[password,setPassword]= useState('')
 
@@ -51,7 +53,12 @@ const SignIn = () => {
         "Password" :password,
       } 
         axios.post("http://127.0.0.1:8000/api/client/search",obj).then((response)=>{
-          console.log(response.data.result.length  >0 ? console.log('kayn') : console.log('non makin') ); //model afficher
+      if ( response.data.result.length  >0){
+        sessionStorage.setItem("Client",JSON.stringify(response.data.result))
+        route('/Search') 
+      }else{
+        console.log('non makin') ; //model afficher
+      } 
           
      })
       
