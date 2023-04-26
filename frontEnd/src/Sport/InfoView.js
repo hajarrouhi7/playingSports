@@ -10,9 +10,9 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-
-const InfoView = ({id}) => {
-
+import {useNavigate } from "react-router-dom";
+const InfoView = () => {
+    const route = useNavigate()
     // const [id, setId] = useState(null);
     // const [terrain,setTerrain] =useState([])
     // useEffect(() => {
@@ -27,11 +27,17 @@ const InfoView = ({id}) => {
     //const [id, setId] = useState(); // initialize the ID to 1
     const [terrain,setTerrain] =useState([])
     useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/InfoTerrain/${id}`)
+        const ID = sessionStorage.getItem("ID")
+        ID ? 
+            fetch(`http://127.0.0.1:8000/api/InfoTerrain/${ID}`)
         .then(response => response.json())
         .then(data => setTerrain(data))
-        .catch(error => console.error(error));
-    }, [id]);
+        .catch(error => console.error(error))
+        
+        : route("/View");
+    
+
+    },[]);
     // const [terrain,setTerrain] =useState([])
     // useEffect(() => {
     //     fetchTerrain();

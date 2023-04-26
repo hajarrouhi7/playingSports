@@ -1,6 +1,6 @@
 import React,{useState,useEffect}  from "react";
 import axios from "axios";
-import { Link} from 'react-router-dom';
+import { Link, Route} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -8,10 +8,14 @@ import Col from 'react-bootstrap/Col';
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import './View.css';
+import InfoView from "./InfoView";
+import {useNavigate } from "react-router-dom";
+
 const View = () => {
     const [terrain, setTerrain] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const route = useNavigate()
   
     useEffect(() => {
       fetchTerrain();
@@ -71,15 +75,16 @@ const View = () => {
                       >
                         Book
                       </Button>
-                      <Link to={`/InfoView/${row.id}`}>
+            
                         <Button
+                        onClick={()=>{    sessionStorage.setItem("ID", row.id) ; route("/InfoView") }}
                           variant="dark"
                           className="btn"
                           style={{ width: "90px" }}
                         >
                           View
                         </Button>
-                      </Link>
+             
                     </Card.Body>
                   </Card>
                 </Col>
