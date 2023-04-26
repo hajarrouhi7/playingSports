@@ -152,5 +152,15 @@ class InfoTerrainController extends Controller
             'message'=>'terrain deleted successful'
         ]);
     }
+
+    public function SearchInfoTiran(Request $request){
+        $terrains = InfoTerrain::where($request->all())->get();
+   
+        return response()->json([
+            'message'=>'success',
+            "InfoTerain" => $terrains
+        ]);
+    }
+
 }
 

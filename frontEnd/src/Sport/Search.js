@@ -5,6 +5,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import './Search.css';
 import {useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Search = () => {
   const [city,setCity] = useState("")
@@ -18,8 +19,16 @@ const Search = () => {
         "ville":city,
         "type" : type
       } 
-    console.log("ICI ", obj);
-    // route("/View")
+       axios.post("http://127.0.0.1:8000/api/SearchInfoTiran",obj)
+          .then(({data})=>{
+            if(data.InfoTerain.length > 0 ){
+            sessionStorage.setItem("Infos",JSON.stringify(data.InfoTerain))
+              route("/View")
+            }else{
+              alert("NotFound")
+            }
+          })
+   
     }else{
       alert("Remplire tous  les champs")
     }
