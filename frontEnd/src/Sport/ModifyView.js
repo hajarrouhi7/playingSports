@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import NavBarAdd from "./NavBarAdd";
 import Container from "react-bootstrap/Container";
@@ -9,8 +9,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const ModifyView =() => {
-    const navigate = useNavigate();
-    const {id} = useParams();
+    const route = useNavigate();
     const [img1, setImg1] = useState('');
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
@@ -23,27 +22,28 @@ const ModifyView =() => {
     const [price, setPrice] = useState(0.00);
 
     useEffect(() => {
-        fetchTerrain();
+        const ID = sessionStorage.getItem("ID")
+        ID ?
+            fetch(`http://127.0.0.1:8000/api/InfoTerrain/${ID}`)
+            .then(({data})=>{
+                const {img1,img2,img3,title,description,location,type,surface,ville,price} = data.message
+                setImg1(img1)
+                setImg2(img2)
+                setImg3(img3)
+                setTitle(title)
+                setDescription(description)
+                setLocation(location)
+                setType(type)
+                setSurface(surface)
+                setVille(ville)
+                setPrice(price)
+    
+            }).catch(({response: {data}}) => {
+                    console.log(data.message)
+            })
+        :route("/ModifyView")
     }, []);
-    const fetchTerrain = async() =>{
-        await axios.get('http://127.0.0.1:8000/api/InfoTerrain/' + id)
-        .then(({data})=>{
-            const {img1,img2,img3,title,description,location,type,surface,ville,price} = data.message
-            setImg1(img1)
-            setImg2(img2)
-            setImg3(img3)
-            setTitle(title)
-            setDescription(description)
-            setLocation(location)
-            setType(type)
-            setSurface(surface)
-            setVille(ville)
-            setPrice(price)
-
-        }).catch(({response: {data}}) => {
-                console.log(data.message)
-        })
-    }
+    
     const changeHandleImage1 = (e) => {
         setImg1(e.target.files[0]);
     }
@@ -68,11 +68,12 @@ const ModifyView =() => {
         formData.append('surface',surface)
         formData.append('ville',ville)
         formData.append('price',price)
-
-        await axios.post('http://127.0.0.1:8000/api/InfoTerrain'+id,formData)
+        const ID1 = sessionStorage.getItem("ID")
+        ID1 ?
+        fetch(`http://127.0.0.1:8000/api/InfoTerrain/${ID1}`,formData)
         .then(({data})=>{
             console.log(data.message)
-            navigate('/ListViewed')
+            
 
         }).catch(({response}) => {
             if(response.status ===422){
@@ -83,7 +84,7 @@ const ModifyView =() => {
             
             }
         })
-
+        :route('/ListViewed')
     }
 
     return(
@@ -142,7 +143,7 @@ const ModifyView =() => {
                 </Row>
                 <Row>
                     <Col>
-                        <Button variant="secondary" type="submit">Add</Button>
+                        <Button variant="secondary" type="submit">Modify</Button>
                     </Col>
                 </Row>
                 </Form>

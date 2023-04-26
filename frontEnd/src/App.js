@@ -40,7 +40,7 @@ function App() {
         <Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path='/ListViewed' element={<ListView/>}/>
         <Route path='/AddView' element={<AddView/>}/>
-        <Route path='/ModifyView/:id' element={<ModifyView/>}/>
+        <Route path='/ModifyView' element={<ModifyView/>}/>
         <Route path='/ListUsers' element={<Users/>}/>
         <Route path='/ListBooked' element={<ListBook/>}/>
       </Routes>     

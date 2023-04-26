@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from "axios";
 import "./Info.css";
-import { useParams } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Carousel from 'react-bootstrap/Carousel';

@@ -45,7 +45,6 @@ const ListBook = () => {
                     <th>Name</th>
                     <th>E-mail</th>
                     <th>Number</th>
-                    <th>Identifiant de client</th>
                     <th>Identifiant de stade</th>
                     <th>Date book</th>
                     <th>Time</th>
@@ -61,7 +60,6 @@ const ListBook = () => {
                     <td>{row.LastName} {row.FirstName}</td>
                     <td>{row.Email}</td>
                     <td>{row.Number}</td>
-                    <td>{row.client_id}</td>
                     <td>{row.infoTerrain_id}</td>
                     <td>{row.DateBook}</td>
                     <td>{row.BookTime}</td>

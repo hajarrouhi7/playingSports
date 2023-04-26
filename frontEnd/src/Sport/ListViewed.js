@@ -5,20 +5,36 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { Link} from 'react-router-dom';
+import ModifyView from "./ModifyView";
 import Card from "react-bootstrap/Card";
+import {useNavigate } from "react-router-dom";
 
 const ListView = () => {
-    const [terrain,setTerrain] =useState([])
+    const [terrain,setTerrain] =useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const route = useNavigate()
+
     useEffect(() => {
         fetchTerrain();
-       
     }, []);
-    const fetchTerrain =async() =>{ // data from database
-        await axios.get('http://127.0.0.1:8000/api/InfoTerrain')
-        .then(({data})=>{
-            setTerrain(data) 
-        })
+    const fetchTerrain =async() =>{
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/api/InfoTerrain");
+            setTerrain(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+            setError("Failed to fetch terrain data");
+            setLoading(false);
+        }
+    }
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (error) {
+      return <div>Error: {error}</div>;
     }
     const deleteTerrain = async(id) =>{
         await axios.delete('http://127.0.0.1:8000/api/InfoTerrain/'+ id)
@@ -42,8 +58,7 @@ const ListView = () => {
                     </Col>
                 </Row>
                 <Row>
-                {terrain.length > 0 && (
-                terrain.map((row,key) =>(
+                {terrain.map((row,key) =>(
                 <Col>
                 <Card key={key} style={{ width: '31vw',height:'20vh',marginBottom:"20px",marginTop:"30px",backgroundColor:'#e9f5db'}}>
                     <Row>
@@ -55,7 +70,7 @@ const ListView = () => {
                             <Card.Title style={{marginBottom:'20px'}}>{row.title}</Card.Title>
                             <Row>
                             <Col>
-                            <Link to={`/ModifyView/${row.id}`}><Button className="bg-warning">Modify</Button></Link>
+                            <Button className="bg-warning" onClick={()=>{    sessionStorage.setItem("ID", row.id) ; route("/ModifyView") }}>Modify</Button>
                             </Col>
                             <Col>
                             <Button className="bg-danger" onClick={() => deleteTerrain(row.id)}>Delete</Button>
@@ -67,7 +82,7 @@ const ListView = () => {
                 </Card>
                 </Col>
                 ))
-                )}
+                }
                 </Row>
             </Container>
         </div>
