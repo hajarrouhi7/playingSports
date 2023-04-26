@@ -149,7 +149,7 @@ class InfoTerrainController extends Controller
         $terrain = InfoTerrain::findOrFail($id);
         $terrain->delete();
         return response()->json([
-            'message'=>'terrain deleted successful'
+            'message'=>'You want to delete this stade'
         ]);
     }
 }

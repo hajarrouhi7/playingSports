@@ -23,10 +23,10 @@ const ListView = () => {
     const deleteTerrain = async(id) =>{
         await axios.delete('http://127.0.0.1:8000/api/InfoTerrain/'+ id)
         .then(({data})=>{
-            console.log(data.message)
+            alert(data.message)
             fetchTerrain();
         }).catch(({response: {data}}) => {
-            console.log(data.message)
+            alert(data.message)
         })
     }
     return(
