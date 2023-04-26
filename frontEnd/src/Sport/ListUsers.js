@@ -41,6 +41,7 @@ const Users = () => {
             <Table responsive bordered className="mt-3">
                 <thead>
                     <tr>
+                    <th>Identifiant</th>
                     <th>Last Name</th>
                     <th>First Name</th>
                     <th>E-mail</th>
@@ -52,6 +53,7 @@ const Users = () => {
                     {user.length > 0 && (
                     user.map((row) =>(
                     <tr>
+                    <td>{row.id}</td>
                     <td>{row.LastName}</td>
                     <td>{row.FirstName}</td>
                     <td>{row.EmailAddress}</td>
