@@ -18,19 +18,15 @@ return new class extends Migration
             $table->string('FirstName');
             $table->string('LastName');
             $table->string('Email');
-            $table->integer('Number');
-            $table->date('DateBook');
-            $table->time('BookTime');
-            $table->integer('Duration');
+            $table->string('Number');
+            $table->string('DateBook');
+            $table->string('BookTime');
+            $table->string('Duration');
             $table->float('Price');
-            $table->unsignedInteger('infoTerrain_id');
-            $table->foreign('infoTerrain_id')
-            ->references('id')
-            ->on('info_terrains');
-            $table->unsignedInteger('client_id');
-            $table->foreign('client_id')
-            ->references('id')
-            ->on('clients');
+            $table->foreignId('infoTerrain_id')
+            ->contrained('info_terrains');
+            $table->foreignId('client_id')
+            ->contrained('clients');
             $table->timestamps();
         });
     }

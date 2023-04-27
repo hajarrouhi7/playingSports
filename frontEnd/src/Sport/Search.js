@@ -47,6 +47,9 @@ const Search = () => {
               <option selected>City</option>
               <option value="Marrakech">Marrakech</option>
               <option value="Fes">Fes</option>
+              <option value="Agadir">Agadir</option>
+              <option value="Tanger">Tanger</option>
+              <option value="Meknes">Meknes</option>
               <option value="Rabat">Rabat</option>
             </select>
           </div>

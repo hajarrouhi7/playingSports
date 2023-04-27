@@ -40,6 +40,7 @@ class PaymentDetailsController extends Controller
         $PaymentDetails->CardNumber= $request->CardNumber;
         $PaymentDetails->ExpiryDate= $request->ExpiryDate;
         $PaymentDetails->CVV= $request->CVV;
+        $PaymentDetails->reservation_id= $request->reservation_id;
         $PaymentDetails->save();
         return response()->json(['status'=> 'Success']);
     }

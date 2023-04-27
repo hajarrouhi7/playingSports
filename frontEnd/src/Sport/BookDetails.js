@@ -246,7 +246,7 @@ const BookDetails = () => {
                         <TextField required id="Duration" name="Duration" label="Duration" fullWidth autoComplete="duration" variant="standard"  focused={foc} color={color7}  error={isValid7} onChange={(e)=>{handlduration(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField required id="TotalPrice" name="TotalPrice" label="price" fullWidth autoComplete="totalPrice" variant="standard" focused={foc} color={color8}  error={isValid8} onChange={(e)=>{handltotalPrice(e.target.value)} } />
+                        <TextField required id="TotalPrice" name="TotalPrice" label="Price" fullWidth autoComplete="totalPrice" variant="standard" focused={foc} color={color8}  error={isValid8} onChange={(e)=>{handltotalPrice(e.target.value)} } />
                     </Grid>
                     <Grid item xs={12}>
                         <FormControlLabel control={<Checkbox color="secondary" name="saveAddress" value="yes" />} label="Use this Booked details for payment details"/>

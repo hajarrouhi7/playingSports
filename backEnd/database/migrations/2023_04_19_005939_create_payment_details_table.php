@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
             $table->string('NameCard');
-            $table->integer('CardNumber');
-            $table->date('ExpiryDate');
-            $table->Integer('CVV');
-            $table->unsignedInteger('reservation_id');
-            $table->foreign('reservation_id')
-            ->references('id')
-            ->on('reservations');
+            $table->string('CardNumber');
+            $table->string('ExpiryDate');
+            $table->string('CVV');
+            $table->foreignId('reservation_id')
+            ->contrained('reservations');
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ import axios from 'axios';
 
 const theme = createTheme();
 const PaymentDetails = () => {
+  const Book = JSON.parse(sessionStorage.getItem("Reservation"))
   const route=useNavigate()
   const [cardOwner,setcardOwner]=useState('')
   const [numCard,setnumCard]=useState('')
@@ -38,6 +39,7 @@ const PaymentDetails = () => {
   const [color3,setColor3] = useState("")
   const [color4,setColor4] = useState("")
   const [foc,setFoc] = useState(false)
+  const date = React.useRef()
 
   const handlcardOwner = (e) =>{
     if ( e.length >=8){
@@ -88,18 +90,23 @@ const PaymentDetails = () => {
     }
   }
   const handleSubmit =()=>{
-    const obj ={
-      "cardOwner":cardOwner,
-      "numCard":numCard,
-      "dateExpiry":dateExpiry,
-      "cvv":cvv
-  
-  }
-  console.log('data =>',obj);
-   axios.post("http://127.0.0.1:8000/api/PaymentDetails",obj).then((response)=>{
-     route('/@@@')
-    
-    
+    const obj = {
+      "NameCard":"Card owner",
+      "CardNumber":"123 456 789 098",
+      "ExpiryDate":"2022-09-11 11:21:00",
+      "CVV":"1236",
+              "reservation_id":"3"
+          }
+    const obj1 ={
+      "NameCard":cardOwner.toString(),
+      "CardNumber":numCard.toString(),
+      "ExpiryDate":date.current.value,
+      "CVV":cvv.toString(),
+      "reservation_id":Book[0].id.toString()
+    }
+    console.log('data =>',obj1);
+    axios.post("http://127.0.0.1:8000/api/PaymentDetails ",obj1).then((response)=>{
+    //  route('/CardBook')
     })
   }
 
@@ -119,28 +126,28 @@ const PaymentDetails = () => {
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} >
-                        <TextField required id="cardOwner" label="Name on card" fullWidth autoComplete="cardOwner" variant="standard" name='cardOwner' focused={foc} color={color1}  error={isValid1} onChange={(e)=>{ handlcardOwner(e.target.value)} }/>
+                        <TextField required id="NameCard" label="Card Owner" fullWidth autoComplete="NameCard" variant="standard" name='NameCard' focused={foc} color={color1}  error={isValid1} onChange={(e)=>{ handlcardOwner(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12} >
-                        <TextField required id="numCard" label="Card number" fullWidth autoComplete="numCard" variant="standard" name='numCard'  focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handlnumCard(e.target.value)} }/>
+                        <TextField required id="CardNumber" label="Card number" fullWidth autoComplete="CardNumber" variant="standard" name='CardNumber'  focused={foc} color={color2}  error={isValid2} onChange={(e)=>{handlnumCard(e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12}  sm={6} style={{marginTop:'5px'}}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DatePicker',]}>
-                        <DemoItem name='dateExpiry'>
-                        <DatePicker label='Expiry date' views={['month','year']}focused={foc} color={color3}  error={isValid3} onChange={(e)=>{handldateExpiry (e.target.value)} } />
+                        <DemoItem>
+                        <DatePicker label='Expiry date' views={['month','year']} name="ExpiryDate" focused={foc} color={color3}  error={isValid3} inputRef={date} defaultValue={JSON.stringify(new Date())} />
                         </DemoItem>
                     </DemoContainer>
                     </LocalizationProvider>
                     </Grid>
                     <Grid item xs={12}  sm={6}>
-                        <TextField required id="cvv" label="CVV" helperText="Last three digits on signature strip" fullWidth autoComplete="cvv" variant="standard" name='cvv' focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlcvv (e.target.value)} }/>
+                        <TextField required id="CVV" label="CVV" helperText="Last three digits on signature strip" fullWidth autoComplete="CVV" variant="standard" name='CVV' focused={foc} color={color4}  error={isValid4} onChange={(e)=>{handlcvv (e.target.value)} }/>
                     </Grid>
                     <Grid item xs={12}>
                         <FormControlLabel control={<Checkbox color="secondary" name="saveCard" value="yes" />} label="Remember credit card details for next time" />
                     </Grid>
                   </Grid>
-                  <Button type="button" id='btn' fullWidth sx={{ mt: 3, mb: 2 }} onClick={handleSubmit}>
+                  <Button type="button" href='/CardBook' id='btn' fullWidth sx={{ mt: 3, mb: 2 }} onClick={handleSubmit}>
                     Payment
                   </Button>
                 </Box>

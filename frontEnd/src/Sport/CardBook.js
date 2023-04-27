@@ -29,10 +29,10 @@ const CardBook = () => {
     return(
         <ThemeProvider theme={theme}>
             <NavBar/>
+            {reserve.length > 0 && (
+            reserve.map((row,key) =>(
             <Container component="main" maxWidth="sm" style={{marginTop:'20px',marginBottom:'30px',borderRadius:'20px',backgroundColor:'#e9f5db'}}>
               <CssBaseline />
-              {reserve.length > 0 && (
-                reserve.map((row,key) =>(
               <Box key={key} sx={{ marginTop: 3, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <Avatar sx={{ m: 1, bgcolor: 'green' }}>
                   <BookmarkIcon />
@@ -120,9 +120,9 @@ const CardBook = () => {
                 </React.Fragment>
                 </Box>
               </Box>
-              ))
-              )}
             </Container>
+            ))
+            )}
             <Footer/>
         </ThemeProvider>
     );
