@@ -145,7 +145,7 @@ const InfoView = () => {
                         </Card>
                     </Col>
                 </Row>
-                <Card body className='mb-2 card'><Row><Col sm={10} className="m-auto cardFooter">If you want to book this stade click on book</Col><Col sm={2}><Button style={{width:'90px'}}>Book</Button></Col></Row></Card>
+                <Card body className='mb-2 card'><Row><Col sm={10} className="m-auto cardFooter">If you want to book this stade click on book</Col><Col sm={2}><Button href="./BookDetails" style={{width:'90px'}}>Book</Button></Col></Row></Card>
             </div>
             </div>
         {/* ))
